@@ -33,7 +33,7 @@
 			position: fixed;
 			z-index: 99;
 			left: 0;
-			top: 0;
+			top: 0px;
 			width: 100%;
 			height: 45px;
 			background-color: $uni-bg--navbar-color;

@@ -2,7 +2,8 @@
 	<view class="content box">
 		<!-- 自定义头部组件 -->
          <navbar></navbar>
-		 <view v-for="i in 100">
+				 <text>{{statusBarHeight}}</text>
+		 <view v-for="i in 100" :key="i">
 			 <text>{{i}}</text>
 		 </view>
 	</view>
