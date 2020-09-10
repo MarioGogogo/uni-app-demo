@@ -14,7 +14,7 @@
 				<view class="listcard-content-des">
 					<view class="listcard-content-des-label">
 						<view class="listcard-content-des-label-item">
-							标签
+							{{label}}
 						</view>
 					</view>
 					<view class="listcard-content-des-borwse">
@@ -24,7 +24,7 @@
 			</view>
 		</view>
 		<!-- 多图卡片 -->
-		 <view v-if="mode === 'column'" class="listcard mode-column">
+		<view v-if="mode === 'column'" class="listcard mode-column">
 			<view class="listcard-content">
 				<view class="listcard-content-title">
 					<text>
@@ -33,13 +33,13 @@
 				</view>
 				<view class="listcard-image">
 					<view v-for="item in 3" :key='item' class="listcard-image-item">
-						<image src="../../static/logo.png" alt="tup"  />
+						<image src="../../static/logo.png" alt="tup" />
 					</view>
 				</view>
 				<view class="listcard-content-des">
 					<view class="listcard-content-des-label">
 						<view class="listcard-content-des-label-item">
-							标签
+							{{label}}
 						</view>
 					</view>
 					<view class="listcard-content-des-borwse">
@@ -47,7 +47,7 @@
 					</view>
 				</view>
 			</view>
-		</view> 
+		</view>
 		<!-- 大图模式 -->
 		<view v-if="mode === 'bigImage'" class="listcard mode-bigImage">
 			<view class="listcard-image">
@@ -63,7 +63,7 @@
 				<view class="listcard-content-des">
 					<view class="listcard-content-des-label">
 						<view class="listcard-content-des-label-item">
-							标签
+							{{label}}
 						</view>
 					</view>
 					<view class="listcard-content-des-borwse">
@@ -77,10 +77,14 @@
 
 <script>
 	export default {
-		props:{
-			mode:{
-				type:String,
-				default:"base"
+		props: {
+			label: {
+				type: String,
+				default: "标签"
+			},
+			mode: {
+				type: String,
+				default: "base"
 			}
 		},
 		data() {

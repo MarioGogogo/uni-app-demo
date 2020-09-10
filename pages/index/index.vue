@@ -3,10 +3,10 @@
 		<!-- 自定义导航 -->
 		<navbar></navbar>
 		<!-- 选项卡 -->
-		<tab :tabList="tabList" @tab="tab"></tab>
+		<tab :tabList="tabList" :tabIndex="tabIndex" @tab="tab"></tab>
 		<!-- 卡片列表 必须外面包裹一层才能滚动-->
 		<view class="home-swiper">
-			<list-swiper :tabList="tabList"></list-swiper>
+			<list-swiper :tabList="tabList" :activeIndex="activeIndex" @change="change"></list-swiper>
 		</view>
 
 	</view>
@@ -20,6 +20,8 @@
 			return {
 				title: 'Hello',
 				statusBarHeight: 0,
+				tabIndex:0,
+				activeIndex:0,
 				tabList: 100
 			}
 		},
@@ -56,8 +58,15 @@
 					console.log(res);
 				})
 			},
-			tab(item, index) {
-				console.log(item, index);
+			tab({item, index}) {
+				console.log('当前点击tab',index);
+				this.activeIndex = index
+				
+			},
+			change(current){
+				console.log('当前swiper：',current);
+				this.tabIndex = current
+				
 			}
 		}
 	}

@@ -240,7 +240,16 @@ var render = function() {
       _c(
         "v-uni-view",
         { staticClass: _vm._$g(3, "sc"), attrs: { _i: 3 } },
-        [_c("list-swiper", { attrs: { _i: 4 } })],
+        [
+          _c("list-swiper", {
+            attrs: { _i: 4 },
+            on: {
+              change: function($event) {
+                return _vm.$handleViewEvent($event)
+              }
+            }
+          })
+        ],
         1
       )
     ],
@@ -1172,7 +1181,7 @@ __webpack_require__.r(__webpack_exports__);
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 
 {
-  props: ["tabList"],
+  props: ["tabList", "tabIndex"],
   data: function data() {
     return {
       wxsProps: {} };
@@ -1754,7 +1763,7 @@ var render = function() {
                           _c(
                             "v-uni-view",
                             { staticClass: _vm._$g(9, "sc"), attrs: { _i: 9 } },
-                            [_vm._v("标签")]
+                            [_vm._v(_vm._$g(9, "t0-0"))]
                           )
                         ],
                         1
@@ -1834,7 +1843,7 @@ var render = function() {
                               staticClass: _vm._$g(20, "sc"),
                               attrs: { _i: 20 }
                             },
-                            [_vm._v("标签")]
+                            [_vm._v(_vm._$g(20, "t0-0"))]
                           )
                         ],
                         1
@@ -1899,7 +1908,7 @@ var render = function() {
                               staticClass: _vm._$g(30, "sc"),
                               attrs: { _i: 30 }
                             },
-                            [_vm._v("标签")]
+                            [_vm._v(_vm._$g(30, "t0-0"))]
                           )
                         ],
                         1
@@ -1956,7 +1965,7 @@ __webpack_require__.r(__webpack_exports__);
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 
 {
-  props: ["mode"],
+  props: ["label", "mode"],
   data: function data() {
     return {
       wxsProps: {} };
@@ -2292,7 +2301,15 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-uni-swiper",
-    { staticClass: _vm._$g(0, "sc"), attrs: { _i: 0 } },
+    {
+      staticClass: _vm._$g(0, "sc"),
+      attrs: { current: _vm._$g(0, "a-current"), _i: 0 },
+      on: {
+        change: function($event) {
+          return _vm.$handleViewEvent($event)
+        }
+      }
+    },
     _vm._l(_vm._$g(1, "f"), function(item, index, $20, $30) {
       return _c(
         "v-uni-swiper-item",
@@ -2341,7 +2358,7 @@ __webpack_require__.r(__webpack_exports__);
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 var _itemSwiper = _interopRequireDefault(__webpack_require__(/*! ./item-swiper.vue */ 67));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
 {
-  props: ["tabList"],
+  props: ["tabList", "activeIndex"],
   data: function data() {
     return {
       wxsProps: {} };
@@ -2538,7 +2555,7 @@ __webpack_require__.r(__webpack_exports__);
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 
 {
-
+  props: ["label"],
   data: function data() {
     return {
       wxsProps: {} };

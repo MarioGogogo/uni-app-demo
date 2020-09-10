@@ -1,7 +1,7 @@
 <template>
-	<swiper class="home-swiper">
+	<swiper class="home-swiper" :current="activeIndex" @change="change">
 		<swiper-item class="swiper-item" v-for="(item,index) in tabList" :key="index">
-			<item-swiper></item-swiper>
+			<item-swiper :label="item.name"></item-swiper>
 		</swiper-item>
 	</swiper>
 </template>
@@ -19,13 +19,25 @@
 				default () {
 					return []
 				}
+			},
+			activeIndex:{
+				type:Number,
+				default :0
 			}
 		},
 		data() {
 			return {
-
+               
 			};
+		},
+		methods:{
+			change(e){
+				console.log(e);
+				const {current} = e.detail
+				this.$emit('change',current)
+			}
 		}
+		
 	}
 </script>
 
