@@ -1,26 +1,27 @@
 <template>
-	<view class="content box">
-		<!-- 自定义头部组件 -->
+	<view class="home">
+		<!-- 自定义导航 -->
          <navbar></navbar>
 		 <!-- 选项卡 -->
-		 <tab :tabList="tabList"></tab> 
-		 <view v-for="i in tabList" :key="i.name">
-			 <text>{{i.name}}</text>
-		 </view>
+		 <tab :tabList="tabList" @tab="tab"></tab> 
+		 <!-- 卡片列表 -->
+		<list-scroll>
+			   <list-card :mode="'column'"></list-card>
+			   <list-card :mode="'base'"></list-card>
+			  <list-card :mode="'bigImage'"></list-card>
+		 </list-scroll>
 	</view>
 </template>
 
 
 
 <script>
-
 	export default {
-   
 		data() {
 			return {
 				title: 'Hello',
 				statusBarHeight:0,
-				tabList:[]
+				tabList:100
 			}
 		},
 		async created() {
@@ -55,11 +56,26 @@
 				   }
 				  console.log(res);
 			   })
+			},
+			tab(item,index){
+			   console.log(item,index);
 			}
 		}
 	}
 </script>
 
 <style lang="scss">
-
+   page{
+	   height: 100%;
+	   display: flex;
+	   flex-direction: column;
+   }
+   .home{
+	   display: flex;
+	    flex-direction: column;
+		flex: 1;
+		border: 1px solid red;
+		overflow:hidden;
+		
+   }
 </style>
