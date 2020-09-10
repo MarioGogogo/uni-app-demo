@@ -1,7 +1,13 @@
 import Vue from 'vue'
 import App from './App'
 
+import api from './utils/http/comment.js'
+
+
+
 Vue.config.productionTip = false
+
+Vue.prototype.$api = api
 
 App.mpType = 'app'
 

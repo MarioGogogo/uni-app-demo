@@ -2,9 +2,10 @@
 	<view class="content box">
 		<!-- 自定义头部组件 -->
          <navbar></navbar>
-				 <text>{{statusBarHeight}}</text>
-		 <view v-for="i in 100" :key="i">
-			 <text>{{i}}</text>
+		 <!-- 选项卡 -->
+		 <tab :tabList="tabList"></tab> 
+		 <view v-for="i in tabList" :key="i.name">
+			 <text>{{i.name}}</text>
 		 </view>
 	</view>
 </template>
@@ -18,7 +19,8 @@
 		data() {
 			return {
 				title: 'Hello',
-				statusBarHeight:0
+				statusBarHeight:0,
+				tabList:[]
 			}
 		},
 		async created() {
@@ -38,6 +40,22 @@
 		},
 		onLoad() {
 
+		},
+		mounted() {
+			console.log( this.$api );
+			this.getLabel()
+		},
+		methods:{
+			getLabel(){
+			   this.$api.get('http://rap2.taobao.org:38080/app/mock/266176/getTabList',{
+				   username:'jack'
+			   }).then(res=>{
+				   if(res.success && res.code === '200'){
+					   this.tabList = res.results.data
+				   }
+				  console.log(res);
+			   })
+			}
 		}
 	}
 </script>
