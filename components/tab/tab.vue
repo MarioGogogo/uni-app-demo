@@ -2,7 +2,7 @@
 	<view class="tab">
 		<scroll-view class="tab-scroll" scroll-x>
 			<view class="tab-scroll-box">
-				<view v-for="item in tabList" :key='item.name' class="tab-scroll-item">{{item.name}}</view>
+				<view v-for="(item,index) in tabList" :key='index' class="tab-scroll-item">{{item.name}}</view>
 			</view>
 
 		</scroll-view>
