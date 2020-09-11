@@ -77,6 +77,7 @@
 					padding: 0 15px;
 				
 					.navbar-search-icon {
+						height: 30px;
 						color: #999;
 						margin-right: 10px;
 					}
