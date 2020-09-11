@@ -1,34 +1,34 @@
 <template>
 	<view>
 		<!-- 基础卡片 -->
-		<view v-if="mode === 'base'" class="listcard">
+		<view v-if="'base' === cardItem.type" class="listcard">
 			<view class="listcard-image">
 				<image src="../../static/logo.png" alt="tup" mode="aspecfFill" />
 			</view>
 			<view class="listcard-content">
 				<view class="listcard-content-title">
 					<text>
-						uni-app开发框架ni-app开发框架ni-app开发框架ni-app开发框架ni-app开发框架ni-app开发框架ni-app开发框架ni-app开发框架ni-app开发框架
+						{{cardItem.title}}
 					</text>
 				</view>
 				<view class="listcard-content-des">
 					<view class="listcard-content-des-label">
 						<view class="listcard-content-des-label-item">
-							{{label}}
+							{{cardItem.label}}
 						</view>
 					</view>
 					<view class="listcard-content-des-borwse">
-						预览次数：120次
+						预览次数:{{cardItem.like}}次
 					</view>
 				</view>
 			</view>
 		</view>
 		<!-- 多图卡片 -->
-		<view v-if="mode === 'column'" class="listcard mode-column">
+		<view v-if="cardItem.type === 'column'" class="listcard mode-column">
 			<view class="listcard-content">
 				<view class="listcard-content-title">
 					<text>
-						uni-app开发框架ni-app开发框架ni-app开发框架ni-app开发框架ni-app开发框架ni-app开发框架ni-app开发框架ni-app开发框架ni-app开发框架
+							{{cardItem.title}}
 					</text>
 				</view>
 				<view class="listcard-image">
@@ -39,17 +39,17 @@
 				<view class="listcard-content-des">
 					<view class="listcard-content-des-label">
 						<view class="listcard-content-des-label-item">
-							{{label}}
+						{{cardItem.label}}
 						</view>
 					</view>
 					<view class="listcard-content-des-borwse">
-						预览次数：120次
+						预览次数:{{cardItem.like}}次
 					</view>
 				</view>
 			</view>
 		</view>
 		<!-- 大图模式 -->
-		<view v-if="mode === 'bigImage'" class="listcard mode-bigImage">
+		<view v-if="cardItem.type === 'bigImage'" class="listcard mode-bigImage">
 			<view class="listcard-image">
 				<image src="../../static/logo.png" alt="tup" />
 			</view>
@@ -57,17 +57,17 @@
 
 				<view class="listcard-content-title">
 					<text>
-						uni-app开发框架ni-app开发框架ni-app开发框架ni-app开发框架ni-app开发框架ni-app开发框架ni-app开发框架ni-app开发框架ni-app开发框架
+							{{cardItem.title}}
 					</text>
 				</view>
 				<view class="listcard-content-des">
 					<view class="listcard-content-des-label">
 						<view class="listcard-content-des-label-item">
-							{{label}}
+							{{cardItem.label}}
 						</view>
 					</view>
 					<view class="listcard-content-des-borwse">
-						预览次数：120次
+						预览次数:{{cardItem.like}}次
 					</view>
 				</view>
 			</view>
@@ -78,13 +78,11 @@
 <script>
 	export default {
 		props: {
-			label: {
-				type: String,
-				default: "标签"
-			},
-			mode: {
-				type: String,
-				default: "base"
+			cardItem: {
+				type: Array,
+				default(){
+					return []
+				}
 			}
 		},
 		data() {

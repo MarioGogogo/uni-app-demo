@@ -1,17 +1,6 @@
 <template>
 	<list-scroll class="list-scroll">
-		<list-card :mode="'column'" :label="label"></list-card>
-		<list-card :mode="'base'"></list-card>
-		<list-card :mode="'bigImage'"></list-card>
-		<list-card :mode="'column'"></list-card>
-		<list-card :mode="'base'"></list-card>
-		<list-card :mode="'bigImage'"></list-card>
-		<list-card :mode="'column'"></list-card>
-		<list-card :mode="'base'"></list-card>
-		<list-card :mode="'bigImage'"></list-card>
-		<list-card :mode="'column'"></list-card>
-		<list-card :mode="'base'"></list-card>
-		<list-card :mode="'bigImage'"></list-card>
+		<list-card v-for="(item,index) in list" :key="item.id" :cardItem="item"></list-card>
 	</list-scroll>
 
 </template>
@@ -19,9 +8,11 @@
 <script>
 	export default {
 		props:{
-			label:{
-				type:String,
-				default:"标签"
+			list:{
+				type:Array,
+				default(){
+					return []
+				}
 			}
 		}
 	}
