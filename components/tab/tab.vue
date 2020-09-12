@@ -22,27 +22,27 @@
 			},
 			tabIndex: {
 				type: Number,
-				default :0
+				default: 0
 			}
 		},
 		data() {
 			return {
-				activeIndex:0
+				activeIndex: 0
 			}
 		},
 		methods: {
-			clickTab(item,i) {
+			clickTab(item, i) {
 				this.activeIndex = i
-				this.$emit('tab',{
-					data:item,
-					index:i
+				this.$emit('tab', {
+					data: item,
+					index: i
 				})
 			}
 		},
-		watch:{
-			tabIndex(newVal,oldVal){
+		watch: {
+			tabIndex(newVal, oldVal) {
 				this.activeIndex = newVal
-				console.log(newVal,oldVal);
+				console.log(newVal, oldVal);
 			}
 		}
 	}
@@ -50,15 +50,17 @@
 
 <style lang="scss">
 	@import '../../common/css/icons.css';
+
 	.tab {
 		display: flex;
 		width: 100%;
 		border-bottom: 1px solid #f5f5f5;
 		box-sizing: border-box;
+
 		.tab-scroll {
 			flex: 1;
 			overflow: hidden;
-             
+
 			.tab-scroll-box {
 				display: flex;
 				flex-direction: row;
@@ -71,11 +73,12 @@
 					font-size: 14px;
 					flex-shrink: 0; //不然元素挤压
 					padding: 0 13px;
-					&.active{
+
+					&.active {
 						color: red;
 					}
 				}
-				
+
 			}
 		}
 

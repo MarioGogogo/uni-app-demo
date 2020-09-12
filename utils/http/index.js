@@ -41,10 +41,10 @@
 
  		return new Promise((resolve, reject) => {
  			//添加一个提示框，可以提升交互，也能防止数据未加载完用户点击导致报错
- 			uni.showLoading({
- 				title: '加载中',
- 				mask: true
- 			});
+ 			// uni.showLoading({
+ 			// 	title: '加载中',
+ 			// 	mask: true
+ 			// });
  			uni.request({
  				url: url, //接口地址
  				header: herders,
@@ -53,7 +53,7 @@
  				success: function(res) {
 					console.log('请求回来了吗',res);
  					//关闭提示框
- 					uni.hideLoading();
+ 					// uni.hideLoading();
 
  					if (res.statusCode !== 200) { //请求失败显示报错信息
  						uni.showToast({

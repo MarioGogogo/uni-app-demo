@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view @click="openDetail">
 		<!-- 基础卡片 -->
 		<view v-if="'base' === cardItem.type" class="listcard">
 			<view class="listcard-image">
@@ -10,6 +10,7 @@
 					<text>
 						{{cardItem.title}}
 					</text>
+					<likes :islike="cardItem.like"></likes>
 				</view>
 				<view class="listcard-content-des">
 					<view class="listcard-content-des-label">
@@ -28,8 +29,9 @@
 			<view class="listcard-content">
 				<view class="listcard-content-title">
 					<text>
-							{{cardItem.title}}
+						{{cardItem.title}}
 					</text>
+						<likes :islike="cardItem.like"></likes>
 				</view>
 				<view class="listcard-image">
 					<view v-for="item in 3" :key='item' class="listcard-image-item">
@@ -39,11 +41,11 @@
 				<view class="listcard-content-des">
 					<view class="listcard-content-des-label">
 						<view class="listcard-content-des-label-item">
-						{{cardItem.label}}
+							{{cardItem.label}}
 						</view>
 					</view>
 					<view class="listcard-content-des-borwse">
-						预览次数:{{cardItem.like}}次
+						预览次数:{{cardItem.borwser}}次
 					</view>
 				</view>
 			</view>
@@ -57,8 +59,9 @@
 
 				<view class="listcard-content-title">
 					<text>
-							{{cardItem.title}}
+						{{cardItem.title}}
 					</text>
+						<likes :islike="cardItem.like"></likes>
 				</view>
 				<view class="listcard-content-des">
 					<view class="listcard-content-des-label">
@@ -79,9 +82,9 @@
 	export default {
 		props: {
 			cardItem: {
-				type: Array,
-				default(){
-					return []
+				type: Object,
+				default () {
+					return {}
 				}
 			}
 		},
@@ -89,6 +92,11 @@
 			return {
 
 			};
+		},
+		methods: {
+			openDetail() {
+				console.log('打开详情');
+			}
 		}
 	}
 </script>
@@ -123,10 +131,13 @@
 			width: 100%;
 
 			.listcard-content-title {
+				position: relative;
 				font-size: 14px;
+				padding-right: 30px;
 				color: #333;
 				font-weight: 400;
 				line-height: 1.2;
+				display: flex;
 
 				text {
 					overflow: hidden;
@@ -135,6 +146,7 @@
 					-webkit-line-clamp: 2; //溢出隐藏
 					-webkit-box-orient: vertical; //溢出隐藏
 				}
+
 			}
 
 			.listcard-content-des {

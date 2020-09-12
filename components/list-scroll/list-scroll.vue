@@ -1,6 +1,6 @@
 <template>
 	<view class="scroll">
-		<scroll-view scroll-y class="scroll-list">
+		<scroll-view scroll-y class="scroll-list" @scrolltolower="loadmore">
 			<!-- 滚动内容建议用父元素包裹📦 -->
 			<view>
 			   <slot></slot>
@@ -15,6 +15,12 @@
 			return {
 
 			};
+		},
+		methods:{
+			loadmore(){
+	
+				this.$emit('loadmore')
+			}
 		}
 	}
 </script>
