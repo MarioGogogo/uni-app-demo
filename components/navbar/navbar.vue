@@ -4,10 +4,25 @@
 			<!-- 状态栏高度 -->
 			<view :style="{height:statusBarHeight+'px'}"></view>
 			<!-- 导航栏高度 -->
-			<view class="navbar-content">
-				<view class="navbar-search">
+			<view class="navbar-content" :class="{search:isSearch}">
+				<view class="icons-back" v-if="isSearch" @click="goBack">
+					<text class="iconfont icon-fanhui"></text>
+				</view>
+				<!-- 搜索页 -->
+				<view v-if="isSearch" class="navbar-search">
 					<view class="navbar-search-icon">
-				          <text class="iconfont icon-search"></text>
+						<text class="iconfont icon-search"></text>
+					</view>
+					<input class="navbar-searach-text"  
+					value="" 
+					placeholder="请输入要搜索的内容"
+					@input="inputChange"
+					></input>
+				</view>
+				<!-- 非搜索页 -->
+				<view  v-else  class="navbar-search" @click="jumpToSearch">
+					<view class="navbar-search-icon">
+						<text class="iconfont icon-search"></text>
 					</view>
 					<view class="navbar-searach-text">
 						请输入要搜索的词
@@ -15,15 +30,22 @@
 				</view>
 			</view>
 		</view>
-	  <view :style="{height:(statusBarHeight+45)+'px'}"></view>
+		<view :style="{height:(statusBarHeight+45)+'px'}"></view>
 	</view>
 </template>
 
 <script>
 	export default {
+		props:{
+			isSearch:{
+				type:Boolean,
+				default:false
+			}
+		},
 		data() {
 			return {
-				statusBarHeight:0
+				statusBarHeight: 0,
+				searchKey:""
 			}
 		},
 		async created() {
@@ -34,19 +56,30 @@
 			// #ifndef H5 || APP-PLUS || MP-ALIPAY
 			const menButtonInfo = uni.getMenuButtonBoundingClientRect()
 			//胶囊底部 - 状态栏的高度  + （胶囊顶部 - 状态栏的高度） == 导航栏的高度
-			const navBarHeight = menButtonInfo.bottom - info[1].statusBarHeight 
+			const navBarHeight = menButtonInfo.bottom - info[1].statusBarHeight
 			const navBarWidht = menButtonInfo.left
 			// #endif
-			
+
 		},
 		methods: {
-
+			jumpToSearch() {
+				uni.navigateTo({
+					url: "../../pages/home-search/home-search"
+				})
+			},
+			goBack(){
+				uni.navigateBack()
+			},
+			inputChange(e){
+				this.$emit('inputChange',e.detail.value)
+			}
 		}
 	}
 </script>
 
 <style lang="scss">
 	@import '../../common/css/icons.css';
+
 	.navbar {
 		.navbar-fixed {
 			position: fixed;
@@ -55,7 +88,8 @@
 			top: 0;
 			width: 100%;
 			background-color: #007aff;
-            .navbar-content{
+
+			.navbar-content {
 				height: 45px;
 				width: 100%;
 				background-color: $uni-bg--navbar-color;
@@ -64,7 +98,9 @@
 				justify-content: center;
 				align-items: center;
 				padding: 0 15px;
-				 box-sizing: border-box; //这个样式很重要 右边不会跑出边界
+				box-sizing: border-box; //这个样式很重要 右边不会跑出边界
+				
+
 				.navbar-search {
 					width: 100%;
 					height: 30px;
@@ -73,20 +109,38 @@
 					align-items: center;
 					border-radius: 30px;
 					padding: 0 15px;
-				
+
 					.navbar-search-icon {
 						height: 30px;
 						color: #999;
 						margin-right: 10px;
 					}
-			
+
 					.navbar-searach-text {
-						font-size: 12px;
+						font-size: 14px;
 						color: #999;
+					}
+				}
+				&.search{
+					padding-left: 0;
+					.icons-back{
+					     margin-left: 10px;
+						 margin-right: 10px;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						
+						.icon-fanhui{
+							font-size: 22px;
+						}
+					}
+					.navbar-search{
+							border-radius:5px;
 					}
 				}
 			}
 			
+
 		}
 
 	}

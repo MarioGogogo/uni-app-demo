@@ -19,7 +19,13 @@
 				"navigationBarTitleText": "消息"
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/home-search/home-search",
+            "style" : {
+				"navigationStyle": "custom"
+			}
+        }
+    ],
 	"globalStyle": {
 		// "navigationBarTextStyle": "#FFFFFF",
 		"navigationBarTitleText": "uni-app",
