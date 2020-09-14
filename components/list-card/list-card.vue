@@ -1,7 +1,7 @@
 <template>
 	<view @click="openDetail">
 		<!-- 基础卡片 -->
-		<view v-if="'base' === cardItem.type" class="listcard">
+		<view v-if="'base' === cardItem.type" class="listcard" >
 			<view class="listcard-image">
 				<image src="../../static/logo.png" alt="tup" mode="aspecfFill" />
 			</view>
@@ -96,6 +96,9 @@
 		methods: {
 			openDetail() {
 				console.log('打开详情');
+				
+				//设置历史记录
+				this.$emit('setHistory')
 			}
 		}
 	}

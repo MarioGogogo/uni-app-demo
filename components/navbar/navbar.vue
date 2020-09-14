@@ -37,6 +37,10 @@
 <script>
 	export default {
 		props:{
+			value:{
+				type:[String,Number],
+				default:""
+			},
 			isSearch:{
 				type:Boolean,
 				default:false
@@ -72,6 +76,11 @@
 			},
 			inputChange(e){
 				this.$emit('inputChange',e.detail.value)
+			}
+		},
+		watch:{
+			value(newVal){
+				this.searchKey = newVal
 			}
 		}
 	}

@@ -1,6 +1,6 @@
 <template>
 	<view class="home-history">
-		<navbar :isSearch="true" @inputChange="inputChange"></navbar>
+		<navbar :isSearch="true"  v-model="value"     @inputChange="inputChange"></navbar>
 		<view class="search-list" v-if="is_search">
 			<view class="label-box">
 				<view class="label-header">
@@ -8,7 +8,7 @@
 					<text class="iconfont icon-ashbin"></text>
 				</view>
 				<view class="label-content" v-if="historyLists.length > 0">
-					<view class="label-content-item" v-for="(item,index) in historyLists" :key="index">{{item.name}}历标签</view>
+					<view class="label-content-item" v-for="(item,index) in historyLists"   @click="openHistory(item)" :key="index">{{item.name}}历标签</view>
 				</view>
 				<view class="label-no-data" v-else>
 					<text class="iconfont icon-cry"></text>
@@ -16,9 +16,16 @@
 				</view>
 			</view>
 		</view>
+		<!-- 显示搜索结果 -->
 		<view v-else>
 			<list-scroll class="list-scroll">
-				<list-card v-for="(item,index) in searchList" :key="item.id" :cardItem="item"></list-card>
+				<uni-load-more v-if="loading" status="loading" iconType="snow"></uni-load-more>
+				<view v-if="searchList.length > 0">
+						<list-card v-for="(item,index) in searchList" :key="item.id" :cardItem="item"  @setHistory="setHistory"></list-card>
+				</view>
+		           <view v-if="searchList.length === 0 && !loading" class="no-data">
+					  <text class="iconfont icon-cry"></text>没有搜索到相关历史
+				   </view>
 			</list-scroll>
 
 		</view>
@@ -33,7 +40,9 @@
 		data() {
 			return {
 				is_search: false,
-				searchList: []
+				searchList: [],
+				value:"" ,         //搜索关键词
+				loading:false,
 				// historylist:[]
 			}
 		},
@@ -41,9 +50,19 @@
 			...mapState(['historyLists'])
 		},
 		onLoad() {
-			this.getList()
+			// this.getList()
 		},
 		methods: {
+			setHistory(){
+				this.$store.dispatch('set_history', {
+					name: this.value
+				})
+			},
+			openHistory(item){
+				//历史记录赋值给 input
+				this.value = item.name
+				_this.getList(this.value)
+			},
 			inputChange(value) {
 				if(!value){
 					clearTimeout(this.timer)
@@ -65,8 +84,6 @@
 					},1000)
 					
 				}
-
-
 			},
 			test() {
 				this.$store.dispatch('set_history', {
@@ -75,17 +92,22 @@
 			},
 			getList(value) {
 				//是一个请求
+				this.loading = true
 				this.$api.post('http://mock.52react.cn/mock/5f5b965db2af46167ac3ea3e/v1.0/swiperList', {
 					name: "全部",
 					page: 1,
 					pageSize: 20
 				}).then(res => {
+					this.loading = false
 					console.log(res);
 					const {
 						data
 					} = res
 					this.searchList = data
 					console.log('搜索数据结果', data);
+				}).catch(error=>{
+					this.loading = false
+					console.log(error);
 				})
 
 			}
@@ -107,8 +129,6 @@
 		display: flex;
 		flex-direction: column;
 		flex: 1;
-		border: 1px solid red;
-
 		.search-list {
 			background-color: #fff;
 			margin-bottom: 10px;
@@ -161,6 +181,23 @@
 				}
 			}
 
+		}
+		.list-scroll{
+			.no-data{
+				height: 150px;
+				background-color: #fff;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 18px;
+				.icon-cry{
+					font-size: 22px;
+					padding-right: 4px;
+				}
+				
+			}
+			
+		
 		}
 
 	}
