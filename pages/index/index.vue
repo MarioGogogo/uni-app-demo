@@ -32,10 +32,10 @@
 		},
 		methods: {
 			getLabel() {
-				this.$api.get('http://rap2.taobao.org:38080/app/mock/266176/getTabList', {
+				this.$api.get('http://mock.52react.cn/mock/5f60f3e38f2bfd46836daf23/v1.0/getTabList', {
 					username: 'jack'
 				}).then(res => {
-					if (res.success && res.code === '200') {
+					if (res.success && res.code === 200) {
 						const arr = [{name:'全部',id:"0"},...res.results.data]
 						this.tabList = arr
 					}

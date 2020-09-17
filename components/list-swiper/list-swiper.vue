@@ -63,7 +63,7 @@
 				}
 				//是一个请求
 			   	const arg = this.tabList[current].name
-				this.$api.post('http://mock.52react.cn/mock/5f5b965db2af46167ac3ea3e/v1.0/swiperList',{
+				this.$api.post('http://mock.52react.cn/mock/5f60f3e38f2bfd46836daf23/v1.0/swiperList',{
 					name:arg,
 					page:this.loadPage[current].page,
 					pageSize:this.pageSize
