@@ -3,7 +3,7 @@
 		<!-- 基础卡片 -->
 		<view v-if="'base' === cardItem.type" class="listcard" >
 			<view class="listcard-image">
-				<image src="../../static/logo.png" alt="tup" mode="aspecfFill" />
+				<image :src="cardItem.images[0]" alt="tup" mode="aspecfFill" />
 			</view>
 			<view class="listcard-content">
 				<view class="listcard-content-title">
@@ -34,8 +34,8 @@
 						<likes :islike="cardItem.like"></likes>
 				</view>
 				<view class="listcard-image">
-					<view v-for="item in 3" :key='item' class="listcard-image-item">
-						<image src="../../static/logo.png" alt="tup" />
+					<view v-for="item in cardItem.images" :key='item' class="listcard-image-item">
+						<image :src="item" alt="tup" />
 					</view>
 				</view>
 				<view class="listcard-content-des">
@@ -53,7 +53,7 @@
 		<!-- 大图模式 -->
 		<view v-if="cardItem.type === 'bigImage'" class="listcard mode-bigImage">
 			<view class="listcard-image">
-				<image src="../../static/logo.png" alt="tup" />
+				<image :src="cardItem.images[0]" alt="tup" />
 			</view>
 			<view class="listcard-content">
 
